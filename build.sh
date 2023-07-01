@@ -5,11 +5,7 @@ APP_NAME="my-url-shortener-app"
 
 echo "docker container rm --force \"${APP_NAME}\""
 echo "docker build -t ${APP_NAME} ."
-#echo "docker run -p ${HTTP_PORT}:${HTTP_PORT} -e PORT=${HTTP_PORT} ${APP_NAME}"
 echo "docker run -d --name ${APP_NAME} --sysctl net.ipv4.ip_unprivileged_port_start=0 --publish ${HTTP_PORT}:${HTTP_PORT} ${APP_NAME}"
-
-# kill running
-#docker ps -aqf "name=${APP_NAME}"
 
 docker container rm --force "${APP_NAME}"
 docker build -t ${APP_NAME} .
