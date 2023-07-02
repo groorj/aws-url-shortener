@@ -9,4 +9,4 @@ COPY app-url-shortener.py .
 
 EXPOSE 8215
 
-CMD ["python", "app-url-shortener.py"]
+CMD ["python", "-u", "app-url-shortener.py"]
