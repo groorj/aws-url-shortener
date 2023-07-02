@@ -3,3 +3,4 @@ _archive
 _archive/*
 source.sh
 .vscode/
+ecr.sh
