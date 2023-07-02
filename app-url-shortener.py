@@ -61,7 +61,6 @@ class RedirectionHandler(http.server.SimpleHTTPRequestHandler):
 port = int(os.environ.get('PORT', http_port))
 handler = RedirectionHandler
 with socketserver.TCPServer((server_address, port), handler) as httpd:
-    # print(f"Serving at port {port}")
     logger.info("Serving at port [%s]", port)
     httpd.serve_forever()
 
