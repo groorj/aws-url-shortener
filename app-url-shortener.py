@@ -6,17 +6,13 @@ import logging
 from sys import stdout
 
 # logging
-# logger
 logger = logging.getLogger()
 logger_level = 'DEBUG' # CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET
 logger.setLevel(logger_level)
-logFormatter = logging.Formatter("stdout - %(name)s - [%(asctime)s] - %(levelname)s - \"%(filename)s:%(funcName)s\" - \"%(message)s\"")
+logFormatter = logging.Formatter("stdout - %(relativeCreated)d - [%(asctime)s] - %(levelname)s - \"%(filename)s:%(funcName)s\" - \"%(message)s\" - %(name)s")
 consoleHandler = logging.StreamHandler(stdout) #set streamhandler to stdout
 consoleHandler.setFormatter(logFormatter)
 logger.addHandler(consoleHandler)
-
-# 172.17.0.1 - - [02/Jul/2023 00:28:48] "GET /health-check HTTP/1.1" 200 -
-# root         2023-07-02 00:28:48,825 DEBUG    app-url-shortener.py:do_GET path2: [health-check]
 
 # vars
 table_name = 'redirections_table'
@@ -31,27 +27,22 @@ server_address = '0.0.0.0'
 class RedirectionHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         path = self.path[1:]  # Remove leading '/'
-        print(path)
-        logger.info("path: [%s]", path)
-        logger.debug("path2: [%s]", path)
+        logger.debug("path: [%s]", path)
 
 #        self.send_response(302)
 #        self.send_header('Location', '/hehehe')
 #        self.end_headers()
 
         if (path == 'health-check'):
-            print("/health-check")
+            logger.info("Health-check request [%s]", path)
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b'Hello!')
         else:
-            print("else")
+            logger.debug("else -> path [%s]", path)
             self.send_response(302)
             self.send_header('Location', '/caiu-no-else')
             self.end_headers()
-
-
-
 
 #            # Retrieve redirection mappings from DynamoDB
 #            response = table.get_item(Key={'source_uri': path})
