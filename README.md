@@ -144,25 +144,25 @@ There you will find the Load Balancer name under `DNS names`.
 
 How to test it:
 
-    curl -vvvvv curl -vvvv my-url-shortener-lb-new2-304039992.us-east-1.elb.amazonaws.com/testing
+    curl -vvvv my-url-shortener-lb-new2-304039992.us-east-1.elb.amazonaws.com/dynamodb
 
 
 Result should be similar to:
 ```
-*   Trying 34.231.130.47:80...
-* Connected to my-url-shortener-lb-new2-304039992.us-east-1.elb.amazonaws.com (34.231.130.47) port 80 (#0)
-> GET /testing HTTP/1.1
+*   Trying 184.73.160.70:80...
+* Connected to my-url-shortener-lb-new2-304039992.us-east-1.elb.amazonaws.com (184.73.160.70) port 80 (#0)
+> GET /dynamodb HTTP/1.1
 > Host: my-url-shortener-lb-new2-304039992.us-east-1.elb.amazonaws.com
 > User-Agent: curl/7.86.0
 > Accept: */*
 >
 * Mark bundle as not supporting multiuse
-< HTTP/1.1 302 Found
-< Date: Sun, 02 Jul 2023 21:54:26 GMT
+< HTTP/1.1 301 Moved Permanently
+< Date: Mon, 03 Jul 2023 03:39:32 GMT
 < Transfer-Encoding: chunked
 < Connection: keep-alive
 < Server: SimpleHTTP/0.6 Python/3.9.17
-< Location: /caiu-no-else
+< Location: https://aws.amazon.com/dynamodb/
 <
 * Connection #0 to host my-url-shortener-lb-new2-304039992.us-east-1.elb.amazonaws.com left intact
 ```
